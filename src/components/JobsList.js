@@ -7,7 +7,7 @@ const JobsList = props => {
         .then(res => setJobs(res.data))
     }, []);
 
-    const [jobs, setJobs] = useState([ ]);
+    const [jobs, setJobs] = useState([]);
 
     return(
         <div className='jobs-list'>
