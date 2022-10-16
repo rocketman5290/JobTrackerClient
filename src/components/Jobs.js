@@ -11,21 +11,20 @@ const Divider = () => {
     )
 }
 
-
-
-// const useAddJob = job => {
-//         console.log(job)
+// TODO: turn to hook properly
+const useAddJob = job => {
+        console.log(job)
         
-//         axios.post('/api/v1/jobs', qs.stringify(
-//             {
-//               job:{
-//                 company: job.company,
-//                 position: job.position,
-//                 description: job.description}
-//             }))
-//             .then(res=>( console.log(res)))
-//             .catch( error => console.log(error))
-// }
+        axios.post('/api/v1/jobs', qs.stringify(
+            {
+              job:{
+                company: job.company,
+                position: job.position,
+                description: job.description}
+            }))
+            .then(res=>( console.log(res)))
+            .catch( error => console.log(error))
+}
 
 const NewJobForm = () => {
     const [formState, updateFormState] = useState({ company:'',
@@ -36,7 +35,6 @@ const NewJobForm = () => {
     const [job, setJob ] = useState(formState)
 
     const addJob = job => {
-        // console.log(formState)
         return (
             axios.post('/api/v1/jobs', qs.stringify(
                 {
@@ -49,34 +47,16 @@ const NewJobForm = () => {
                 .catch( error => console.log(error))
             )
     }
-        
-
-    // const addJob = () => {
-    //     console.log(formState)
-    //     const qs = require('qs')
-        
-    //     axios.post('/api/v1/jobs', qs.stringify(
-    //         {
-    //           job:{
-    //             company: formState.company,
-    //             position: formState.position,
-    //             description: formState.description}
-    //         }))
-    //         .then(res=>( console.log(res)))
-    //         .catch( error => console.log(error))
-    // }
     
     const handleInputChange = event => {
         const {name, value} = event.target
         setJob({...job, [name]: value})
-        console.log(job)
     }
 
     return (
         <form onSubmit={event => {
           event.preventDefault()
           if (!job.company || !job.position || !job.description) return;
-        //   props.addJob(job)
           setJob(formState)
           addJob(job)
         }}>
