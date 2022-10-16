@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import JobsList from './components/JobsList';
+import { JobsList, NewJobForm, Divider } from './components/Jobs';
 
 function App() {
 
@@ -8,6 +8,8 @@ function App() {
     <div className="App">
         <h1>Jobs</h1>
         <JobsList />
+        <Divider />
+        <NewJobForm />
     </div>
   );
 }
