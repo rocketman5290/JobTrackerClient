@@ -2,10 +2,34 @@ import React, { useState} from 'react';
 import axios from 'axios';
 import qs from 'qs'
 
-const NewJobForm = props => {
-    const [formState] = useState({ company:'', position:'', description:''})
+// const useFetchJobs = () => {
+//   const [jobs, setJobs] = useState([]);
 
-    const [job, setJob ] = useState(formState)
+//     useEffect(() => {
+//         axios.get('api/v1/jobs.json')
+//         .then(res => setJobs(res.data))
+//         // return  [jobs, setJobs]
+//     }, []);
+    
+//     return [jobs, setJobs]
+// }
+
+// const useUpdateJob = () => {
+//   // const [job, setJob] = useState({company: '', position: '', description: ''})
+
+//   return [job, setJob]
+// }
+
+// const [job, setJob] = useState({company: '', position: '', description: ''})
+// const [jobs, setJobs] = useState([]);
+
+//   useEffect(() => {
+//       axios.get('api/v1/jobs.json')
+//       .then(res => setJobs(res.data))
+//   }, []);
+
+const NewJobForm = props => {
+    const [job, setJob ] = useState({ company:'', position:'', description:''})
 
     const addJob = job => {
         return (
@@ -36,7 +60,7 @@ const NewJobForm = props => {
                 <form onSubmit={event => {
                     event.preventDefault()
                     if (!job.company || !job.position || !job.description) return;
-                        setJob(formState)
+                        // setJob(job)
                         addJob(job)
                 }}>
                 <label>Company</label>
@@ -61,11 +85,11 @@ const JobsList = props => {
     //     .then(res => setJobs(res.data))
     // }, []);
 
+
     const handleJobDelete = (_event, id) => {
         axios.delete("/api/v1/jobs/" + String(id))
-            .then(res => props.setJobs(props.jobs.filter(job => job.id !== id )))
-            .catch(error => console.log(error))
-    }
+            .then(res => props.setJobs(props.jobs.filter(job => job.id !== Number(id ))))
+            .catch(error => console.log(error))}
 
     return(
         <div className='jobs-list'>
@@ -83,6 +107,4 @@ const JobsList = props => {
             ))}
         </div>
     )
-}; //end of JobListComponent
-
-export {JobsList, NewJobForm};
+}; 
